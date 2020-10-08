@@ -10,11 +10,14 @@ public class Converter{
     private static Matcher mat;
                               
     public static boolean isNumber(String number){
+        // returns true if the inserted string can be interpreted as number
         mat = PAT.matcher(number);
         return mat.matches();
     }
     
     private static long wholePart(String number){
+        // returns whole part of the inputted string 
+        // the part in front of the decimal point
         int dotIndex = number.indexOf(".");
         if (dotIndex == -1){
             return Long.parseLong(number);
@@ -24,6 +27,8 @@ public class Converter{
     }
     
     private static double fractionPart(String number){
+        // returns fractional part of the inputted string
+        // the part behind the decimal point
         int dotIndex = number.indexOf(".");
         if (dotIndex == -1){
             return 0.0;
@@ -34,6 +39,8 @@ public class Converter{
     }
     
     public static String convertToBinary(String number) {
+        // converts the base 2 representation of number given in string format
+        
         // split the input into integer part and decimal part
         long intPtDecimal = wholePart(number);
         double fracPtDecimal = fractionPart(number);
@@ -49,7 +56,7 @@ public class Converter{
         }
         if (isNegative) intPtBinaryString = "-" + intPtBinaryString;
             
-        // convert the decimal part
+        // convert the fractional part
         String fracPtString = "";
         for (int j=0; j<20; j++){
             fracPtDecimal *= 2;
